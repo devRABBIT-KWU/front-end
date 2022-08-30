@@ -1,0 +1,79 @@
+.App {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+
+    // 드래그 방지 (UX / 따로 허용할 부분에는 all을 지정할 것)
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    .AppTitleBar {
+        width: 100%;
+        height: 3rem;
+        //padding-left: 1rem;
+        //padding-right: 1rem;
+        display: flex;
+        color: white;
+        background-color: #303030;
+        text-align: left;
+        font-size: 1rem;
+
+        .AppLogoAndFileName {
+            width: 85%;
+            padding-left: 1rem;
+            display: inline-flex;
+            text-align: left;
+            vertical-align: middle;
+            align-items: center;
+            overflow: hidden;
+        
+            // 애플리케이션 좌측 최상단에 뜨는 애플리케이션 로고 파일 속성
+            .AppLogo {
+                width: 1.75rem;
+                height: 1.75rem;
+                max-width: 32px;
+                margin-right: 0.5rem;
+            }
+        }
+        
+        .LoginUserInfo {
+            width: 20%;
+            max-width: 15%;
+            padding: 0.25rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            display: inline-flex;
+            text-align: right;
+            justify-content: right;
+            vertical-align: middle;
+            align-items: center;
+
+            #UserName {
+                font-size: 0.9rem;
+                overflow: ellipsis;
+            }
+
+            #UserGroup {
+                color: gray;
+                font-size: 0.75rem;
+                overflow: ellipsis;
+            }
+
+            .UserProfileImage {
+                width: 1.75rem;
+                height: 1.75rem;
+                max-width: 32px;
+                margin-left: 0.5rem;
+            }
+        }
+        .LoginUserInfo:hover {
+            background-color: #505050;
+        }
+
+    }
+}

@@ -1,0 +1,26 @@
+#topMenu {
+    background-color: #303030;
+    ul {
+        margin: 0;
+        padding: 0;
+        padding-bottom: 0.25rem;
+        padding-left: 4rem;
+        display: flex;
+        list-style-type: none;
+    }
+    li {
+        margin-right: 1rem;
+        padding: 0.35rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    li:hover {
+        background-color: #505050;
+    }
+    li.Unavailable {
+        color: #404040;
+    }
+    li.Unavailable:hover {
+        background-color: #303030;
+    }
+}
