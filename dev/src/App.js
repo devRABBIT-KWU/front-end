@@ -19,6 +19,7 @@ import ImageEditor from "@toast-ui/react-image-editor";
 
 class App extends Component {
   render() {
+    document.documentElement.lang = 'ko';
     return (
       <div className="App">
         <div className="AppTitleBar">
@@ -32,7 +33,7 @@ class App extends Component {
           </div>
           {/* 이 부분을 컴포넌트로 대체할 것 */}
           <div className="LoginUserInfo">
-            <div id="UserName">데브래빗(devRABBIT)sdfsdfsfdsfsdf
+            <div id="UserName">데브래빗(devRABBIT)
               <div id="UserGroup">팀 사용자</div>
             </div>
             
