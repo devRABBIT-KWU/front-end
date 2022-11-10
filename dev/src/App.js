@@ -30,8 +30,9 @@ class App extends Component {
             />{" "}
             SampleImage.png
           </div>
+          {/* 이 부분을 컴포넌트로 대체할 것 */}
           <div className="LoginUserInfo">
-            <div id="UserName">데브래빗(devRABBIT)
+            <div id="UserName">데브래빗(devRABBIT)sdfsdfsfdsfsdf
               <div id="UserGroup">팀 사용자</div>
             </div>
             

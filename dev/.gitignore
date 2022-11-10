@@ -24,3 +24,6 @@ yarn-error.log*
 
 # Sample image
 /image
+
+# Sample code by NHN.tui.image-editor
+dev/src/directAPIExample.html

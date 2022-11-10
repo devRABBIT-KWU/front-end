@@ -15,8 +15,6 @@
     .AppTitleBar {
         width: 100%;
         height: 3rem;
-        //padding-left: 1rem;
-        //padding-right: 1rem;
         display: flex;
         color: white;
         background-color: #303030;
@@ -37,7 +35,7 @@
                 width: 1.75rem;
                 height: 1.75rem;
                 max-width: 32px;
-                margin-right: 0.5rem;
+                margin-right: 1.0rem;
             }
         }
         
@@ -54,14 +52,21 @@
             align-items: center;
 
             #UserName {
+                width: 85%;
                 font-size: 0.9rem;
-                overflow: ellipsis;
+                display: block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             #UserGroup {
                 color: gray;
                 font-size: 0.75rem;
-                overflow: ellipsis;
+                display: block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .UserProfileImage {
