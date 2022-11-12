@@ -1,19 +1,68 @@
 #topMenu {
     background-color: #303030;
-    ul {
+
+    > ul {
         margin: 0;
         padding: 0;
         padding-bottom: 0.25rem;
         padding-left: 4rem;
         display: flex;
         list-style-type: none;
+
+        > li {
+            margin-right: 1rem;
+            padding: 0.35rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+        > li:hover {
+            background-color: #505050;
+        }
+        > li.Unavailable {
+            color: #404040;
+        }
+        > li.Unavailable:hover {
+            background-color: #303030;
+        }
+        
     }
+}
+
+.HiddenDropDownNavMenu {
+    display: none;
+}
+
+.dropDownNavMenu {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0%;
+    position: absolute;
+    display: none;
+    align-content: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    overflow: auto;
+    background-color: #303030;
+
+    hr {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        width: auto;
+        border: #808080 1px solid;
+    }
+
     li {
-        margin-right: 1rem;
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
         padding: 0.35rem;
         padding-left: 0.5rem;
         padding-right: 0.5rem;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
+
     li:hover {
         background-color: #505050;
     }
