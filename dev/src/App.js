@@ -3,8 +3,10 @@ import { Component } from "react";
 
 // 자체작성 패키지/컴포넌트
 import Menu from "./component/Menu_top";
-import ToolBox from "./component/ToolBox_left";
+import ToolBox from "./component/ToolBoxAndCanvas";
 import DetailSetting from "./component/DetailSetting_right";
+import ToolBoxAndCanvas from "./component/ToolBoxAndCanvas";
+
 
 // 스타일시트 파일
 import "./stylesheet/App.scss";
@@ -15,7 +17,6 @@ import USER_PROFILE_IMAGE from "./image/sample_profile.png";
 
 // NHN - ToastUI Image Editor
 import "tui-image-editor/dist/tui-image-editor.css";
-import ImageEditor from "@toast-ui/react-image-editor";
 
 class App extends Component {
   render() {
@@ -46,8 +47,7 @@ class App extends Component {
         </div>
 
         <Menu />
-        <ToolBox />
-
+        <ToolBoxAndCanvas/>
 
         {/*
         <Menu_top />
