@@ -1,56 +1,60 @@
 .ToolBox {
-    height: auto;
-    //min-height: 90vh;
-    max-width: 2.5rem;
+  height: auto;
+  //min-height: 90vh;
+  max-width: 2.5rem;
+  padding: 0.25rem;
+  text-align: center;
+  background-color: #303030;
+  font-size: 0.75rem;
+  flex-grow: 1;
+  float: left;
+
+  .ToolBoxButton {
+    width: 1.5rem;
+    height: 1.5rem;
     padding: 0.25rem;
-    text-align: center;
-    background-color: #303030;
-    font-size: 0.75rem;
-    flex-grow: 1;
-    float: left;
+    display: inline-block;
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+  .ToolBoxButton:hover {
+    background-color: #505050;
+    cursor: pointer;
+  }
 
-    .ToolBoxButton {
-        width: 1.5rem;
-        height: 1.5rem;
-        padding: 0.25rem;
-        display: inline-block;
-        margin-top: 0.25rem;
-        margin-bottom: 0.25rem;
-    }
-    .ToolBoxButton:hover {
-        background-color: #505050;
-        cursor: pointer;
-    }
+  hr {
+    height: 1px;
+    background-color: gray;
+    border: 0;
+  }
 
-    hr {
-        height: 1px;
-        background-color: gray;
-        border: 0;
-    }
+  .important {
+    color: red;
+  }
 
-    .important {
-        color: red;
-    }
+  .ForegroundColor {
+    width: 1.4rem;
+    height: 1.4rem;
+    margin: 0.3rem;
+    margin-top: 1rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    border: 1.5px solid white;
+    background-color: #fcacd3;
+  }
 
-    .ForegroundColor {
-        width: 1.4rem;
-        height: 1.4rem;
-        margin: 0.3rem;
-        margin-top: 1rem;
-        display: inline-block;
-        margin-bottom: 0.5rem;
-        border: 1.5px solid white;
-        background-color: #FCACD3;
-    }
+  .BackgroundColor {
+    width: 1.4rem;
+    height: 1.4rem;
+    margin: 0.3rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    border: 1.5px solid white;
+    background-color: #f962ac;
+  }
+}
 
-    .BackgroundColor {
-        width: 1.4rem;
-        height: 1.4rem;
-        margin: 0.3rem;
-        margin-bottom: 0.5rem;
-        display: inline-block;
-        margin-bottom: 0.5rem;
-        border: 1.5px solid white;
-        background-color: #F962AC;
-    }
+.Detail:hover {
+  cursor: pointer;
 }
