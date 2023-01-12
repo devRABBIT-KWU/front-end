@@ -1,16 +1,17 @@
 // 기본UI 상호작용 버튼 비활성화
+
 .tui-image-editor-help-menu,
-.tui-image-editor-controls, 
+.tui-image-editor-controls,
 .tui-image-editor-header {
-    display: none !important;
+	display: none !important;
 }
 .tui-image-editor-container,
 .tui-image-editor-main-container {
-    background-color: transparent !important;
+	background-color: transparent !important;
 }
 
 // 캔버스 중앙정렬
 .ImageEditorWrapper {
-    text-align: center;
-    flex-grow: 1;
+	text-align: center;
+	flex-grow: 1;
 }
