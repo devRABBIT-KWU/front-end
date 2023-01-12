@@ -3,7 +3,6 @@ import { Component } from "react";
 
 // 자체작성 패키지/컴포넌트
 import Menu from "./component/Menu_top";
-import ToolBox from "./component/ToolBoxAndCanvas";
 import DetailSetting from "./component/DetailSetting_right";
 import ToolBoxAndCanvas from "./component/ToolBoxAndCanvas";
 
@@ -49,12 +48,6 @@ class App extends Component {
         <Menu />
         <ToolBoxAndCanvas/>
 
-        {/*
-        <Menu_top />
-        <ToolBox_left />
-        <DetailSetting_right />
-        */}
-        
       </div>
     );
   }

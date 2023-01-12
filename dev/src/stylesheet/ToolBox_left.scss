@@ -17,6 +17,11 @@
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;
   }
+
+  .ToolBoxButtonActive {
+    background-color: #505050;
+  }
+
   .ToolBoxButton:hover {
     background-color: #505050;
     cursor: pointer;
@@ -30,6 +35,10 @@
 
   .important {
     color: red;
+  }
+
+  .wip {
+    color: gray;
   }
 
   .ForegroundColor {
