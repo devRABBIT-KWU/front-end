@@ -127,16 +127,6 @@ class ToolBoxAndCanvas extends Component {
 		});
 	};
 
-	TextInputHandler = () => {
-		// 텍스트 삽입
-		if (this.state.text_activated === false) {
-			alert("!");
-			const editorInstance = this.editorRef.current.getInstance();
-			editorInstance.addText("Sample Text");
-		}
-		this.setState({ text_activated: !this.state.text_activated });
-	};
-
 	FlipHandler = () => {
 		// 뒤집기 (하위 메뉴 호출)
 		this.setState({ flip_activated: !this.state.flip_activated });
@@ -269,11 +259,11 @@ class ToolBoxAndCanvas extends Component {
 						<br />
 					</div>
 					<div className="ToolBoxButton important" title="오브젝트 모두 제거 (Remove ALL object)" onClick={this.ClearObjectsHandler}>
-						<MdDeleteOutline size={"1.5rem"} />
+						<MdRestartAlt size={"1.5rem"} />
 						<br />
 					</div>
 					<hr />
-					<div className="ToolBoxButton" title="자르기 (Crop)" onClick={this.CropHandler}>
+					<div className="ToolBoxButton wip" title="자르기 (Crop)" onClick={this.CropHandler}>
 						<MdCrop size={"1.5rem"} />
 						<br />
 					</div>
@@ -286,15 +276,15 @@ class ToolBoxAndCanvas extends Component {
 						<br />
 					</div>
 					<hr />
-					<div className="ToolBoxButton" title="선 그리기 (Draw line)" onClick={this.DrawHandler}>
+					<div className="ToolBoxButton wip" title="선 그리기 (Draw line)" onClick={this.DrawHandler}>
 						<MdDraw size={"1.5rem"} />
 						<br />
 					</div>
-					<div className="ToolBoxButton" title="도형 그리기 (Draw shape)">
+					<div className="ToolBoxButton wip" title="도형 그리기 (Draw shape)">
 						<MdOutlineCategory size={"1.5rem"} />
 						<br />
 					</div>
-					<div className="ToolBoxButton" title="아이콘 삽입 (Add icon)">
+					<div className="ToolBoxButton wip" title="아이콘 삽입 (Add icon)">
 						<MdOutlineInsertEmoticon size={"1.5rem"} />
 						<br />
 					</div>
@@ -319,10 +309,6 @@ class ToolBoxAndCanvas extends Component {
 						<br />
 					</div>
 					<hr />
-					<div className="ToolBoxButton" title="이동 (Move)" onClick={this.MoveHandler}>
-						<MdOutlineBackHand size={"1.5rem"} />
-						<br />
-					</div>
 					<div className="ToolBoxButton" title="확대 (Zoom in)" onClick={this.ZoomInHandler}>
 						<MdOutlineZoomIn size={"1.5rem"} />
 						<br />
@@ -405,4 +391,5 @@ function ShapeColorDetail(props) {
 		</div>
 	);
 }
+
 export default ToolBoxAndCanvas;
