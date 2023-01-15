@@ -155,35 +155,37 @@ class ToolBoxAndCanvas extends Component {
 	*/
 
 	RotateHandler = () => {
+		// 회전
 		const editorInstance = this.editorRef.current.getInstance();
 		editorInstance.ui.changeMenu("rotate");
 	};
 
 	DrawHandler = () => {
+		// 선 그리기
 		const editorInstance = this.editorRef.current.getInstance();
 		editorInstance.ui.changeMenu("draw");
 	};
 
 	ShapeDrawHandler = () => {
+		// 도형 그리기
 		const editorInstance = this.editorRef.current.getInstance();
 		editorInstance.ui.changeMenu("shape");
 	};
 
 	IconDrawHandler = () => {
+		// 아이콘 삽입
 		const editorInstance = this.editorRef.current.getInstance();
 		editorInstance.ui.changeMenu("icon");
 	};
 
 	TextInputHandler = () => {
 		// 텍스트 삽입
-		if (this.state.text_activated === false) {
-			const editorInstance = this.editorRef.current.getInstance();
-			editorInstance.addText("Sample Text");
-		}
-		this.setState({ text_activated: !this.state.text_activated });
+		const editorInstance = this.editorRef.current.getInstance();
+		editorInstance.ui.changeMenu("text");
 	};
 
 	FilterHandler = () => {
+		// 필터 적용
 		const editorInstance = this.editorRef.current.getInstance();
 		editorInstance.ui.changeMenu("filter");
 	};
