@@ -3,7 +3,7 @@ import { Component } from "react";
 
 // 자체작성 패키지/컴포넌트
 import Menu from "./component/Menu_top";
-import DetailSetting from "./component/DetailSetting_right";
+//import DetailSetting from "./component/DetailSetting_right";
 import ToolBoxAndCanvas from "./component/ToolBoxAndCanvas";
 
 // 스타일시트 파일
@@ -15,6 +15,12 @@ import USER_PROFILE_IMAGE from "./image/sample_profile.png";
 
 // NHN - ToastUI Image Editor
 import "tui-image-editor/dist/tui-image-editor.css";
+
+// 새로고침 경고 이벤트 리스너
+window.addEventListener('beforeunload', (event) => {
+	event.preventDefault();
+	event.returnValue = "";
+});
 
 class App extends Component {
 	render() {
@@ -42,5 +48,7 @@ class App extends Component {
 		);
 	}
 }
+
+
 
 export default App;

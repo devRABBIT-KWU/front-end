@@ -10,8 +10,18 @@
 	background-color: transparent !important;
 }
 
+// 하단 팝업메뉴 스타일 재정의
+.tui-image-editor-submenu {
+	border-radius: 2rem;
+	background-color: white;
+}
+
 // 캔버스 중앙정렬
 .ImageEditorWrapper {
 	text-align: center;
 	flex-grow: 1;
+}
+.tui-image-editor-align-wrap {
+	border-radius: 0;
+	background-color: transparent !important;
 }

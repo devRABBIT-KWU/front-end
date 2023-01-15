@@ -93,12 +93,17 @@ class ToolBoxAndCanvas extends Component {
 		this.fileInput.current.click();
 	};
 
-	HandHandler = () => {
+	UndoHandler = () => {
+		// 실행취소 (Undo)
 		const editorInstance = this.editorRef.current.getInstance();
-		editorInstance.hand();
+		editorInstance.undo();
 	};
 
-	editorRef = React.createRef();
+	RedoHandler = () => {
+		// 실행취소 (Undo)
+		const editorInstance = this.editorRef.current.getInstance();
+		editorInstance.redo();
+	};
 
 	RemoveActiveObjectHandler = () => {
 		// 선택한 오브젝트 제거
@@ -119,19 +124,17 @@ class ToolBoxAndCanvas extends Component {
 	CropHandler = () => {
 		// 자르기
 		const editorInstance = this.editorRef.current.getInstance();
-		editorInstance.startDrawingMode("CROPPER");
-
-		editorInstance.crop(editorInstance.getCropzoneRect()).then(function () {
-			editorInstance.stopDrawingMode();
-			//resizeEditor();
-		});
+		editorInstance.ui.changeMenu("crop");
 	};
 
 	FlipHandler = () => {
 		// 뒤집기 (하위 메뉴 호출)
+		const editorInstance = this.editorRef.current.getInstance();
 		this.setState({ flip_activated: !this.state.flip_activated });
+		editorInstance.ui.changeMenu("flip");
 	};
 
+	/*
 	FlipXHandler = () => {
 		// 뒤집기 하위 메뉴: 가로로 뒤집기
 		const editorInstance = this.editorRef.current.getInstance();
@@ -149,21 +152,31 @@ class ToolBoxAndCanvas extends Component {
 		const editorInstance = this.editorRef.current.getInstance();
 		editorInstance.resetFlip();
 	};
+	*/
 
 	RotateHandler = () => {
 		const editorInstance = this.editorRef.current.getInstance();
-		editorInstance.rotate(-90);
+		editorInstance.ui.changeMenu("rotate");
 	};
 
 	DrawHandler = () => {
 		const editorInstance = this.editorRef.current.getInstance();
-		editorInstance.draw();
+		editorInstance.ui.changeMenu("draw");
+	};
+
+	ShapeDrawHandler = () => {
+		const editorInstance = this.editorRef.current.getInstance();
+		editorInstance.ui.changeMenu("shape");
+	};
+
+	IconDrawHandler = () => {
+		const editorInstance = this.editorRef.current.getInstance();
+		editorInstance.ui.changeMenu("icon");
 	};
 
 	TextInputHandler = () => {
 		// 텍스트 삽입
 		if (this.state.text_activated === false) {
-			alert("!");
 			const editorInstance = this.editorRef.current.getInstance();
 			editorInstance.addText("Sample Text");
 		}
@@ -177,6 +190,7 @@ class ToolBoxAndCanvas extends Component {
 
 	CursorDownHandler = (event) => {
 		// 커서 클릭 이벤트 핸들러
+		/*
 		const editorInstance = this.editorRef.current.getInstance();
 		editorInstance.on("mousedown", function (event, originPointer) {
 			console.log(originPointer);
@@ -185,6 +199,7 @@ class ToolBoxAndCanvas extends Component {
 				cursor_ypos: parseInt(originPointer.y, 10),
 			});
 		});
+		*/
 	};
 
 	ZoomInHandler = () => {
@@ -232,7 +247,7 @@ class ToolBoxAndCanvas extends Component {
 	};
 
 	SetShapeColor = (color) => {
-		const editorInstance = this.editorRef.current.getInstance();
+		//const editorInstance = this.editorRef.current.getInstance();
 		this.IcolorRef.current.style.background = color.hex;
 	};
 
@@ -263,7 +278,7 @@ class ToolBoxAndCanvas extends Component {
 						<br />
 					</div>
 					<hr />
-					<div className="ToolBoxButton wip" title="자르기 (Crop)" onClick={this.CropHandler}>
+					<div className="ToolBoxButton" title="자르기 (Crop)" onClick={this.CropHandler}>
 						<MdCrop size={"1.5rem"} />
 						<br />
 					</div>
@@ -276,15 +291,15 @@ class ToolBoxAndCanvas extends Component {
 						<br />
 					</div>
 					<hr />
-					<div className="ToolBoxButton wip" title="선 그리기 (Draw line)" onClick={this.DrawHandler}>
+					<div className="ToolBoxButton" title="선 그리기 (Draw line)" onClick={this.DrawHandler}>
 						<MdDraw size={"1.5rem"} />
 						<br />
 					</div>
-					<div className="ToolBoxButton wip" title="도형 그리기 (Draw shape)">
+					<div className="ToolBoxButton" title="도형 그리기 (Draw shape)" onClick={this.ShapeDrawHandler}>
 						<MdOutlineCategory size={"1.5rem"} />
 						<br />
 					</div>
-					<div className="ToolBoxButton wip" title="아이콘 삽입 (Add icon)">
+					<div className="ToolBoxButton" title="아이콘 삽입 (Add icon)" onClick={this.IconDrawHandler}>
 						<MdOutlineInsertEmoticon size={"1.5rem"} />
 						<br />
 					</div>
