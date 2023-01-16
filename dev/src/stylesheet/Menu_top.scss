@@ -1,4 +1,4 @@
-#topMenu {
+#TopMenu {
     background-color: #303030;
 
     > ul {
@@ -14,8 +14,12 @@
             padding: 0.35rem;
             padding-left: 0.5rem;
             padding-right: 0.5rem;
+            border-radius: 0.5rem;
         }
         > li:hover {
+            background-color: #505050;
+        }
+        > li.Selected {
             background-color: #505050;
         }
         > li.Unavailable {
@@ -28,21 +32,25 @@
     }
 }
 
-.HiddenDropDownNavMenu {
+.Hidden {
     display: none;
 }
 
-.dropDownNavMenu {
+.DropDownNavMenu {
+    margin-top: 0.5rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     padding-left: 0%;
-    position: absolute;
-    display: none;
+    position: fixed;
+    list-style-type: none;
     align-content: flex-start;
     flex-direction: column;
     flex-wrap: wrap;
     overflow: auto;
-    background-color: #303030;
+    background-color: #252525;
+    border-radius: 1rem;
+    z-index: 1;
+    font-size: 0.9rem;
 
     hr {
         margin-left: 0.5rem;
