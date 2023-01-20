@@ -17,7 +17,7 @@ import USER_PROFILE_IMAGE from "./image/sample_profile.png";
 import "tui-image-editor/dist/tui-image-editor.css";
 
 // 새로고침 경고 이벤트 리스너
-window.addEventListener('beforeunload', (event) => {
+window.addEventListener("beforeunload", (event) => {
 	event.preventDefault();
 	event.returnValue = "";
 });
@@ -42,13 +42,11 @@ class App extends Component {
 					</div>
 				</div>
 
-				<Menu />
+				{/*<Menu />*/}
 				<ToolBoxAndCanvas />
 			</div>
 		);
 	}
 }
-
-
 
 export default App;
