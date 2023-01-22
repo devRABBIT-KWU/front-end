@@ -305,15 +305,26 @@ class ToolBoxAndCanvas extends Component {
 		try {
 			const clipboardItem = new ClipboardItem({ [blob]: "image/png" });
 			await navigator.clipboard.write([clipboardItem]);
+			alert("클립보드에 이미지가 복사되었습니다!\n(Successfully copied image to clipboard!)");
 		} catch (err) {
 			try {
 				const image = new File([blob], "image.png", { type: "image/png" });
 				const clipboardItem2 = new ClipboardItem({ "image/png": image });
 				await navigator.clipboard.write([clipboardItem2]);
+				alert("클립보드에 이미지가 복사되었습니다!\n(Successfully copied image to clipboard!)");
 			} catch (err2) {
-				console.error("[!] Failed to copy image: ", err2);
+				alert(
+					"클립보드로의 이미지 복사에 실패했습니다.\n브라우저가 해당 기능을 지원하지 않습니다.\n(Failed to copy image to clipboard. This browser doesn't support this feature.)"
+				);
 			}
 		}
+	};
+
+	ExportToTwitterHandler = async () => {
+		const editorInstance = this.editorRef.current.getInstance();
+		const blob = await (await fetch(editorInstance.toDataURL())).blob();
+		const imageURL = URL.createObjectURL(blob);
+		window.open(`https://twitter.com/intent/tweet?text=Check out this image!&url=${imageURL}`);
 	};
 
 	SelectAllHandler = () => {
@@ -354,6 +365,7 @@ class ToolBoxAndCanvas extends Component {
 				<MenuTop
 					ImageUploadHandler={this.ImageUploadHandler}
 					DownloadHandler={this.DownloadHandler}
+					/*ExportToTwitterHandler={this.ExportToTwitterHandler}*/
 					ProjectExitHandler={this.ProjectExitHandler}
 					UndoHandler={this.UndoHandler}
 					RedoHandler={this.RedoHandler}
