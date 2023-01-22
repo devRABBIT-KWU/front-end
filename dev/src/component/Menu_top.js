@@ -13,16 +13,6 @@ class Menu_top extends Component {
 		help_menu_activated: false,
 	};
 
-	editorRef = React.createRef();
-
-	UndoHandler = () => {
-		// 실행취소 (Undo)
-	};
-
-	RedoHandler = () => {
-		// 실행취소 (Undo)
-	};
-
 	render() {
 		return (
 			<div className="Menu">
@@ -41,16 +31,16 @@ class Menu_top extends Component {
 									help_menu_activated: false,
 								})
 							}>
-							파일
+							파일 <span className="EnglishMenuText">(File)</span>
 							<div>
 								<ul id="fileMenu" className={"DropDownNavMenu " + (this.state.file_menu_activated ? "" : "Hidden")}>
-									<li>새로 만들기 (New Project)</li>
-									<li className="Unavailable">불러오기 (Load)</li>
+									<li onClick={this.props.ImageUploadHandler}>새로 만들기 <span className="EnglishMenuText">(New Project)</span></li>
+									<li className="Unavailable">불러오기 <span className="EnglishMenuText">(Load)</span></li>
 									<hr />
-									<li>서버에 저장 (Save)</li>
-									<li>다운로드 (Download)</li>
+									<li className="Unavailable">서버에 저장 <span className="EnglishMenuText">(Save)</span></li>
+									<li onClick={this.props.DownloadHandler}>다운로드 <span className="EnglishMenuText">(Download)</span></li>
 									<hr />
-									<li>프로젝트 종료 및 삭제 (Delete and Exit)</li>
+									<li onClick={this.props.ProjectExitHandler}>프로젝트 종료 및 삭제 <span className="EnglishMenuText">(Delete and Exit)</span></li>
 								</ul>
 							</div>
 						</li>
@@ -67,12 +57,12 @@ class Menu_top extends Component {
 									help_menu_activated: false,
 								})
 							}>
-							편집
+							편집 <span className="EnglishMenuText">(Edit)</span>
 							<ul id="editMenu" className={"DropDownNavMenu " + (this.state.edit_menu_activated ? "" : "Hidden")}>
-								<li onClick={this.UndoHandler}>실행 취소 (Undo)</li>
-								<li onClick={this.RedoHandler}>다시 실행 (Redo)</li>
+								<li onClick={this.props.UndoHandler}>실행 취소 <span className="EnglishMenuText">(Undo)</span></li>
+								<li onClick={this.props.RedoHandler}>다시 실행 <span className="EnglishMenuText">(Redo)</span></li>
 								<hr />
-								<li onClick={this.RedoHandler}>클립보드에 복사 (Copy)</li>
+								<li onClick={this.props.CopyToClipboardhandler}>클립보드에 복사 <span className="EnglishMenuText">(Copy)</span></li>
 							</ul>
 						</li>
 						<li
@@ -88,10 +78,10 @@ class Menu_top extends Component {
 									help_menu_activated: false,
 								})
 							}>
-							선택
+							선택 <span className="EnglishMenuText">(Select)</span>
 							<ul id="selectMenu" className={"DropDownNavMenu " + (this.state.select_menu_activated ? "" : "Hidden")}>
-								<li onClick={this.props.SelectAllHandler}>모두 선택 (Select all)</li>
-								<li onClick={this.props.DeSelectHandler}>선택 해제 (Deselect)</li>
+								<li onClick={this.props.SelectAllHandler}>모두 선택 <span className="EnglishMenuText">(Select all)</span></li>
+								<li onClick={this.props.DeSelectHandler}>선택 해제 <span className="EnglishMenuText">(Deselect)</span></li>
 							</ul>
 						</li>
 						<li
@@ -107,12 +97,12 @@ class Menu_top extends Component {
 									help_menu_activated: false,
 								})
 							}>
-							필터
+							필터 <span className="EnglishMenuText">(Filter)</span>
 							<ul id="filterMenu" className={"DropDownNavMenu " + (this.state.filter_menu_activated ? "" : "Hidden")}>
-								<li onClick={this.props.FilterPreset1}>필터 프리셋 #1 (Filter preset #1)</li>
-								<li onClick={this.props.FilterPreset2}>필터 프리셋 #2 (Filter preset #2)</li>
-								<li onClick={this.props.FilterPreset3}>필터 프리셋 #3 (Filter preset #3)</li>
-								<li onClick={this.props.FilterPreset4}>필터 프리셋 #4 (Filter preset #4)</li>
+								<li onClick={this.props.FilterPreset1}>필터 프리셋 #1 <span className="EnglishMenuText">(Filter preset #1)</span></li>
+								<li onClick={this.props.FilterPreset2}>필터 프리셋 #2 <span className="EnglishMenuText">(Filter preset #2)</span></li>
+								<li onClick={this.props.FilterPreset3}>필터 프리셋 #3 <span className="EnglishMenuText">(Filter preset #3)</span></li>
+								<li onClick={this.props.FilterPreset4}>필터 프리셋 #4 <span className="EnglishMenuText">(Filter preset #4)</span></li>
 								<hr />
 								<li onClick={this.props.FilterHandler}>사용자 지정 필터...</li>
 							</ul>
@@ -130,19 +120,19 @@ class Menu_top extends Component {
 									help_menu_activated: false,
 								})
 							}>
-							보기
+							보기 <span className="EnglishMenuText">(View)</span>
 							<ul id="viewMenu" className={"DropDownNavMenu " + (this.state.view_menu_activated ? "" : "Hidden")}>
-								<li onClick={this.props.ZoomInHandler}>확대 (Zoom in)</li>
-								<li onClick={this.props.ZoomOutHandler}>축소 (Zoom out)</li>
-								<li onClick={this.props.ResetZoomHandler}>원본 크기로 (Original size)</li>
+								<li onClick={this.props.ZoomInHandler}>확대 <span className="EnglishMenuText">(Zoom in)</span></li>
+								<li onClick={this.props.ZoomOutHandler}>축소 <span className="EnglishMenuText">(Zoom out)</span></li>
+								<li onClick={this.props.ResetZoomHandler}>원본 크기로 <span className="EnglishMenuText">(Original size)</span></li>
 								<hr />
-								<li onClick={this.props.FlipXHandler}>좌우 반전 (Flip horizontal)</li>
-								<li onClick={this.props.FlipYHandler}>상하 반전 (Flip vertical)</li>
-								<li onClick={this.props.ResetFlip}>되돌리기 (Reset Flip)</li>
+								<li onClick={this.props.FlipXHandler}>좌우 반전 <span className="EnglishMenuText">(Flip horizontal)</span></li>
+								<li onClick={this.props.FlipYHandler}>상하 반전 <span className="EnglishMenuText">(Flip vertical)</span></li>
+								<li onClick={this.props.ResetFlip}>되돌리기 <span className="EnglishMenuText">(Reset Flip)</span></li>
 							</ul>
 						</li>
-						<li className="Unavailable">이미지 추천</li>
-						<li className="Unavailable">도움말</li>
+						<li className="Unavailable">이미지 추천 <span className="EnglishMenuText">(Image Recommendation)</span></li>
+						<li className="Unavailable">도움말 <span className="EnglishMenuText">(Help)</span></li>
 					</ul>
 				</nav>
 			</div>

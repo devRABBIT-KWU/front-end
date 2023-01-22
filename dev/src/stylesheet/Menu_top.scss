@@ -15,6 +15,10 @@
             padding-left: 0.5rem;
             padding-right: 0.5rem;
             border-radius: 0.5rem;
+            .EnglishMenuText {
+                font-size: 85%;
+                color: #808080;
+            }
         }
         > li:hover {
             background-color: #505050;
@@ -24,6 +28,10 @@
         }
         > li.Unavailable {
             color: #404040;
+            .EnglishMenuText {
+                font-size: 85%;
+                color: #404040;
+            }
         }
         > li.Unavailable:hover {
             background-color: #303030;
@@ -69,6 +77,10 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        .EnglishMenuText {
+            font-size: 85%;
+            color: #808080;
+        }
     }
 
     li:hover {
@@ -76,6 +88,10 @@
     }
     li.Unavailable {
         color: #404040;
+        .EnglishMenuText {
+            font-size: 85%;
+            color: #404040;
+        }
     }
     li.Unavailable:hover {
         background-color: #303030;

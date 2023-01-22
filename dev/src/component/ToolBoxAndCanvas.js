@@ -1,11 +1,15 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import ImageEditor from "@toast-ui/react-image-editor";
 import { SketchPicker } from "react-color";
 import "tui-color-picker/dist/tui-color-picker.css";
 import MenuTop from "./Menu_top";
+
 // 스타일시트 파일
 import "../stylesheet/ToolBox_left.scss";
 import "../stylesheet/Canvas.scss";
+
+// 이미지 파일 (샘플 이미지)
+import SAMPLE_IMAGE from "../image/sample_image.png";
 
 // react-icons
 import {
@@ -36,8 +40,8 @@ const imageEditorOptions = {
 	// 에디터 옵션 설정...
 	includeUI: {
 		loadImage: {
-			path: "https://pbs.twimg.com/media/Fl3bm3WacAI0477?format=jpg&name=medium",
-			name: "SampleImage",
+			path: SAMPLE_IMAGE,
+			name: "sample_image",
 		},
 		uiSize: {
 			width: "90vw",
@@ -58,6 +62,7 @@ const imageEditorOptions = {
 
 class ToolBoxAndCanvas extends Component {
 	state = {
+		image: null,
 		clickedButton: 0,
 		fileMenuActivated: false,
 		flipActivated: false,
@@ -258,6 +263,59 @@ class ToolBoxAndCanvas extends Component {
 		this.IcolorRef.current.style.background = color.hex;
 	};
 
+	ImageUploadHandler = (event) => {
+		document.getElementById("ImageUploader").click();
+	};
+
+	ImageChangeHandler = (event) => {
+		const editorInstance = this.editorRef.current.getInstance();
+		editorInstance.loadImageFromFile(event.target.files[0]).then((result) => {
+			console.log("old : " + result.oldWidth + ", " + result.oldHeight);
+			console.log("new : " + result.newWidth + ", " + result.newHeight);
+		});
+	};
+
+	DownloadHandler = () => {
+		const link = document.createElement("a");
+		const editorInstance = this.editorRef.current.getInstance();
+		link.href = editorInstance.toDataURL();
+		link.download = "download.png";
+		link.click();
+	};
+
+	ProjectExitHandler = () => {
+		if (window.confirm("정말 이 창을 닫고 프로젝트를 삭제할까요?\n(Are you sure to close this window and delete this project?)")) {
+			window.close();
+		}
+	};
+
+	CopyToClipboardhandler = async () => {
+		const editorInstance = this.editorRef.current.getInstance();
+		/*
+		navigator.clipboard.write([new ClipboardItem({ 'image/png': editorInstance.toDataURL() })]).then(
+			function () {
+				console.log("success");
+			},
+			function (err) {
+				console.log("failure: ", err);
+			}
+		);
+		*/
+		const blob = await (await fetch(editorInstance.toDataURL())).blob();
+		try {
+			const clipboardItem = new ClipboardItem({ [blob]: "image/png" });
+			await navigator.clipboard.write([clipboardItem]);
+		} catch (err) {
+			try {
+				const image = new File([blob], "image.png", { type: "image/png" });
+				const clipboardItem2 = new ClipboardItem({ "image/png": image });
+				await navigator.clipboard.write([clipboardItem2]);
+			} catch (err2) {
+				console.error("[!] Failed to copy image: ", err2);
+			}
+		}
+	};
+
 	SelectAllHandler = () => {
 		/* 동작 안됨 */
 		const editorInstance = this.editorRef.current.getInstance();
@@ -294,8 +352,14 @@ class ToolBoxAndCanvas extends Component {
 		return (
 			<div>
 				<MenuTop
+					ImageUploadHandler={this.ImageUploadHandler}
+					DownloadHandler={this.DownloadHandler}
+					ProjectExitHandler={this.ProjectExitHandler}
+					UndoHandler={this.UndoHandler}
+					RedoHandler={this.RedoHandler}
 					SelectAllHandler={this.SelectAllHandler}
 					DeSelectHandler={this.DeSelectHandler}
+					CopyToClipboardhandler={this.CopyToClipboardhandler}
 					FilterPreset1={this.FilterPreset1}
 					FilterPreset2={this.FilterPreset2}
 					FilterPreset3={this.FilterPreset3}
@@ -308,6 +372,7 @@ class ToolBoxAndCanvas extends Component {
 					FlipYHandler={this.FlipYHandler}
 					ResetFlip={this.ResetFlip}
 				/>
+				<input type="file" id="ImageUploader" onChange={this.ImageChangeHandler} style={{ display: "none" }} />
 				<div className="ToolBoxAndCanvasWrapper">
 					<div className="ToolBox">
 						<div className="ToolBoxButton wip" title="이동 (Move)" onClick={this.HandHandler}>

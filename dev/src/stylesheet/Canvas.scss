@@ -24,3 +24,8 @@
 	border-radius: 0;
 	background-color: transparent !important;
 }
+
+// 작업영역 강조 (음영처리)
+.tui-image-editor-canvas-container {
+	box-shadow: 3px 3px 6px 0px black;
+}

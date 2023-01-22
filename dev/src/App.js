@@ -2,7 +2,6 @@
 import { Component } from "react";
 
 // 자체작성 패키지/컴포넌트
-import Menu from "./component/Menu_top";
 //import DetailSetting from "./component/DetailSetting_right";
 import ToolBoxAndCanvas from "./component/ToolBoxAndCanvas";
 
@@ -29,9 +28,9 @@ class App extends Component {
 			<div className="App">
 				<div className="AppTitleBar">
 					<div className="AppLogoAndFileName">
-						<img className="AppLogo" src={APP_LOGO} alt="임시 애플리케이션 아이콘" /> SampleImage.png
+						<img className="AppLogo" src={APP_LOGO} alt="임시 애플리케이션 아이콘" /> 캐럿캔버스&nbsp;<span className="EnglishMenuText">v0.1.0.dev230122A.alpha</span>
 					</div>
-					{/* 이 부분을 컴포넌트로 대체할 것 */}
+					{/* 이 부분은 차후 컴포넌트로 대체 예정 */}
 					<div className="LoginUserInfo">
 						<div id="UserName">
 							데브래빗(devRABBIT)
@@ -41,8 +40,7 @@ class App extends Component {
 						<img className="UserProfileImage" src={USER_PROFILE_IMAGE} alt="임시 애플리케이션 아이콘" />
 					</div>
 				</div>
-
-				{/*<Menu />*/}
+				
 				<ToolBoxAndCanvas />
 			</div>
 		);
