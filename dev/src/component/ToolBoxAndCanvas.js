@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import ImageEditor from "@toast-ui/react-image-editor";
 import { SketchPicker } from "react-color";
 import "tui-color-picker/dist/tui-color-picker.css";
