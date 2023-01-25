@@ -9,3 +9,5 @@
 **React-Color** : `yarn add react-color`
 
 **axios** : `yarn add axios`
+
+**react-zoom-pan-pinch** : `yarn add react-zoom-pan-pinch`
