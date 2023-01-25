@@ -1,0 +1,102 @@
+.ImgRecommendation {
+	height: 100%;
+	width: 25%;
+	position: fixed;
+	right: 0px;
+	background-color: #303030;
+	overflow: scroll;
+
+	.SearchBox {
+		position: relative;
+		background-color: #404040;
+		height: 10%;
+		width: 80%;
+		padding: 10px;
+		margin: auto;
+		top: 12px;
+		border-radius: 20px;
+	}
+	.SearchBox img {
+		position: absolute;
+		width: 32px;
+		height: 32px;
+		top: 10px;
+		right: 12px;
+		margin: 0;
+	}
+	.SearchBox img:hover {
+		cursor: pointer;
+	}
+	.SearchBox input {
+		width: 70%;
+		border: none;
+		border-radius: 8px;
+		padding: 10px 12px;
+		font-size: 18px;
+		background-color: #404040;
+		color: #ffffff;
+	}
+	.SearchBox input:focus {
+		outline: none;
+	}
+
+	&::-webkit-scrollbar {
+		width: 15px;
+		background: #303030;
+	}
+	&::-webkit-scrollbar-thumb {
+		border-radius: 3.5px;
+		background-color: #404040;
+
+		&:hover {
+			background-color: #505050;
+		}
+	}
+	.Tag {
+		position: absolute;
+		top: 8%;
+		font-size: 20px;
+		left: 10%;
+		width: 90%;
+		height: 10%;
+
+		.TagContent {
+			font-size: 17px;
+			width: auto;
+			height: 20px;
+			display: inline-block;
+			margin-bottom: 10px;
+			margin-right: 10px;
+		}
+		.TagContent:hover {
+			cursor: pointer;
+			background-color: #505050;
+		}
+	}
+
+	.Tag span {
+		background-color: #404040;
+		padding: 5px;
+		width: auto;
+		height: 25px;
+		border-radius: 8px;
+		display: inline-block;
+		margin-bottom: 20px;
+	}
+	.ImageArray {
+		position: absolute;
+		top: 18%;
+		text-align: center;
+		padding-bottom: 100px;
+	}
+
+	.ImageArray img {
+		width: 150px;
+		height: 100px;
+		margin: 10px;
+		text-align: center;
+	}
+	.ImageArray img:hover {
+		cursor: pointer;
+	}
+}

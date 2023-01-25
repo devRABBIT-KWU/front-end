@@ -103,8 +103,12 @@ class Menu_top extends Component {
 							}>
 							선택 <span className="EnglishMenuText">(Select)</span>
 							<ul id="selectMenu" className={"DropDownNavMenu " + (this.state.select_menu_activated ? "" : "Hidden")}>
-								<li onClick={this.props.SelectAllHandler}>
-									모두 선택 <span className="EnglishDropDownMenuText">(Select all)</span>
+								<li
+									className={this.props.selectModeActivated ? "MenuClicked" : ""}
+									onClick={() => {
+										this.props.SelectAllHandler();
+									}}>
+									선택 가능 모드 <span className="EnglishDropDownMenuText">(Selectable Mode)</span>
 								</li>
 								<li onClick={this.props.DeSelectHandler}>
 									선택 해제 <span className="EnglishDropDownMenuText">(Deselect)</span>
@@ -126,16 +130,16 @@ class Menu_top extends Component {
 							}>
 							필터 <span className="EnglishMenuText">(Filter)</span>
 							<ul id="filterMenu" className={"DropDownNavMenu " + (this.state.filter_menu_activated ? "" : "Hidden")}>
-								<li onClick={this.props.FilterPreset1}>
+								<li className={this.props.filter_preset_1 ? "MenuClicked" : ""} onClick={this.props.FilterPreset1}>
 									필터 프리셋 #1 <span className="EnglishDropDownMenuText">(Filter preset #1)</span>
 								</li>
-								<li onClick={this.props.FilterPreset2}>
+								<li className={this.props.filter_preset_2 ? "MenuClicked" : ""} onClick={this.props.FilterPreset2}>
 									필터 프리셋 #2 <span className="EnglishDropDownMenuText">(Filter preset #2)</span>
 								</li>
-								<li onClick={this.props.FilterPreset3}>
+								<li className={this.props.filter_preset_3 ? "MenuClicked" : ""} onClick={this.props.FilterPreset3}>
 									필터 프리셋 #3 <span className="EnglishDropDownMenuText">(Filter preset #3)</span>
 								</li>
-								<li onClick={this.props.FilterPreset4}>
+								<li className={this.props.filter_preset_4 ? "MenuClicked" : ""} onClick={this.props.FilterPreset4}>
 									필터 프리셋 #4 <span className="EnglishDropDownMenuText">(Filter preset #4)</span>
 								</li>
 								<hr />
@@ -178,11 +182,24 @@ class Menu_top extends Component {
 								</li>
 							</ul>
 						</li>
-						<li className="Unavailable">
+						<li
+							className={this.props.recommend_image_Activated ? "Selected" : ""}
+							onClick={() => {
+								this.setState(
+									{
+										view_menu_activated: false,
+										file_menu_activated: false,
+										edit_menu_activated: false,
+										select_menu_activated: false,
+										filter_menu_activated: false,
+										help_menu_activated: false,
+									},
+									() => {
+										this.props.ChangeRecommend();
+									}
+								);
+							}}>
 							이미지 추천 <span className="EnglishMenuText">(Image Recommendation)</span>
-						</li>
-						<li className="Unavailable">
-							도움말 <span className="EnglishMenuText">(Help)</span>
 						</li>
 					</ul>
 				</nav>

@@ -1,104 +1,106 @@
 #TopMenu {
-    background-color: #303030;
+	background-color: #303030;
 
-    > ul {
-        margin: 0;
-        padding: 0;
-        padding-bottom: 0.25rem;
-        padding-left: 4rem;
-        display: flex;
-        list-style-type: none;
+	> ul {
+		margin: 0;
+		padding: 0;
+		padding-bottom: 0.25rem;
+		padding-left: 4rem;
+		display: flex;
+		list-style-type: none;
 
-        > li {
-            margin-right: 1rem;
-            padding: 0.35rem;
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-            border-radius: 0.5rem;
-            .EnglishMenuText {
-                font-size: 85%;
-                color: #808080;
-            }
-        }
-        > li:hover {
-            background-color: #505050;
-        }
-        > li.Selected {
-            background-color: #505050;
-        }
-        > li.Unavailable {
-            color: #404040;
-            .EnglishMenuText {
-                font-size: 85%;
-                color: #404040;
-            }
-        }
-        > li.Unavailable:hover {
-            background-color: #303030;
-        }
-        
-    }
+		> li {
+			margin-right: 1rem;
+			padding: 0.35rem;
+			padding-left: 0.5rem;
+			padding-right: 0.5rem;
+			border-radius: 0.5rem;
+			.EnglishMenuText {
+				font-size: 85%;
+				color: #808080;
+			}
+		}
+		> li:hover {
+			background-color: #505050;
+		}
+		> li.Selected {
+			background-color: #505050;
+		}
+		> li.Unavailable {
+			color: #404040;
+			.EnglishMenuText {
+				font-size: 85%;
+				color: #404040;
+			}
+		}
+		> li.Unavailable:hover {
+			background-color: #303030;
+		}
+	}
 }
 
 .Hidden {
-    display: none;
+	display: none;
 }
 
 .DropDownNavMenu {
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-left: 0%;
-    position: fixed;
-    list-style-type: none;
-    align-content: flex-start;
-    flex-direction: column;
-    flex-wrap: wrap;
-    overflow: auto;
-    background-color: #303030;
-    border-radius: 1rem;
-    z-index: 1;
-    font-size: 0.9rem;
+	margin-top: 0.5rem;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	padding-left: 0%;
+	position: fixed;
+	list-style-type: none;
+	align-content: flex-start;
+	flex-direction: column;
+	flex-wrap: wrap;
+	overflow: auto;
+	background-color: #303030;
+	border-radius: 1rem;
+	z-index: 1;
+	font-size: 0.9rem;
 
-    hr {
-        margin-left: 0.5rem;
-        margin-right: 0.5rem;
-        width: auto;
-        border: #808080 1px solid;
-    }
+	hr {
+		margin-left: 0.5rem;
+		margin-right: 0.5rem;
+		width: auto;
+		border: #808080 1px solid;
+	}
 
-    li {
-        margin-left: 0.25rem;
-        margin-right: 0.25rem;
-        padding: 0.35rem;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        display: block;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        .EnglishDropDownMenuText {
-            font-size: 85%;
-            color: #808080;
-        }
-    }
+	li {
+		margin-left: 0.25rem;
+		margin-right: 0.25rem;
+		padding: 0.35rem;
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+		display: block;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		.EnglishDropDownMenuText {
+			font-size: 85%;
+			color: #808080;
+		}
+	}
 
-    li:hover {
-        background-color: #505050;
-    }
-    li.Unavailable {
-        color: #404040;
-        .EnglishDropDownMenuText {
-            font-size: 85%;
-            color: #404040;
-        }
-    }
-    li.Unavailable:hover {
-        background-color: #292929;
-    }
+	.MenuClicked {
+		background-color: #ffa700;
+	}
+	li:hover {
+		background-color: #505050;
+	}
+	li.Unavailable {
+		color: #404040;
+		.EnglishDropDownMenuText {
+			font-size: 85%;
+			color: #404040;
+		}
+	}
+	li.Unavailable:hover {
+		background-color: #292929;
+	}
 }
 
 .ProgramVersionText {
-    font-size: 85%;
-    color: #808080;
+	font-size: 85%;
+	color: #808080;
 }

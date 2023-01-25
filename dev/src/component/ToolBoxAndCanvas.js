@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import ImageEditor from "@toast-ui/react-image-editor";
-import { SketchPicker } from "react-color";
-import "tui-color-picker/dist/tui-color-picker.css";
 import MenuTop from "./Menu_top";
-
+import RecommendImage from "./RecommendImage";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 // 스타일시트 파일
 import "../stylesheet/ToolBox_left.scss";
 import "../stylesheet/Canvas.scss";
+import "tui-color-picker/dist/tui-color-picker.css";
 
 // 이미지 파일 (샘플 이미지)
 import SAMPLE_IMAGE from "../image/sample_image.png";
@@ -29,13 +29,11 @@ import {
 	MdOutlineBackHand,
 	MdOutlineZoomIn,
 	MdOutlineZoomOut,
-	MdOutlineFileUpload,
-	MdOutlineCheck,
 	/*MdOutlineDoDisturbAlt,*/
 } from "react-icons/md";
-import { CgEditFlipH, CgEditFlipV } from "react-icons/cg";
-import { RxReset } from "react-icons/rx";
-import { IoResize } from "react-icons/io5";
+
+import { IoResize, IoSearch } from "react-icons/io5";
+
 const imageEditorOptions = {
 	// 에디터 옵션 설정...
 	includeUI: {
@@ -67,14 +65,14 @@ class ToolBoxAndCanvas extends Component {
 		fileMenuActivated: false,
 		flipActivated: false,
 		text_activated: false,
+		handActivated: false,
 		cursor_xpos: 0,
 		cursor_ypos: 0,
-		waterMarkActivated: false,
 		imageId: 0,
-		brushColorActivated: false,
-		shapeColorActivated: false,
-		brushColor: "#000000",
-		shapeColor: "#000000",
+		filter_preset_1: false,
+		filter_preset_2: false,
+		filter_preset_3: false,
+		filter_preset_4: false,
 	};
 	constructor(props) {
 		super(props);
@@ -83,17 +81,18 @@ class ToolBoxAndCanvas extends Component {
 			menu_file_activated: false,
 			flip_activated: false,
 			text_activated: false,
+			selectActivated: true,
+			selectModeActivated: true,
 			cursor_xpos: 0,
 			cursor_ypos: 0,
 			zoomLvl: 1,
+			recommend_image_Activated: false,
 		};
-		this.CursorDownHandler = this.CursorDownHandler.bind(this);
 	}
 
 	editorRef = React.createRef();
 	fileInput = React.createRef();
-	BcolorRef = React.createRef();
-	IcolorRef = React.createRef();
+	handRef = React.createRef();
 
 	handleButtonClick = (e) => {
 		this.fileInput.current.click();
@@ -195,72 +194,28 @@ class ToolBoxAndCanvas extends Component {
 		editorInstance.ui.changeMenu("filter");
 	};
 
-	CursorDownHandler = (event) => {
-		// 커서 클릭 이벤트 핸들러
-		/*
-		const editorInstance = this.editorRef.current.getInstance();
-		editorInstance.on("mousedown", function (event, originPointer) {
-			console.log(originPointer);
-			this.setState({
-				cursor_xpos: parseInt(originPointer.x, 10),
-				cursor_ypos: parseInt(originPointer.y, 10),
-			});
-		});
-		*/
-	};
-
 	ZoomInHandler = () => {
-		if (this.state.zoomLvl < 5) {
-			this.setState({ zoomLvl: this.state.zoomLvl + 1 }, () => {
-				const editorInstance = this.editorRef.current.getInstance();
-				editorInstance.zoom({ x: 500, y: 500, zoomLevel: this.state.zoomLvl });
-			});
-		}
+		const { zoomIn } = this.handRef.current;
+		zoomIn();
 	};
 
 	ZoomOutHandler = () => {
-		if (this.state.zoomLvl > 1) {
-			this.setState({ zoomLvl: this.state.zoomLvl - 1 }, () => {
-				const editorInstance = this.editorRef.current.getInstance();
-				editorInstance.zoom({ x: 500, y: 500, zoomLevel: this.state.zoomLvl });
-			});
-		}
+		const { zoomOut } = this.handRef.current;
+		zoomOut();
 	};
 
 	ResetZoomHandler = () => {
-		const editorInstance = this.editorRef.current.getInstance();
-		editorInstance.resetZoom();
+		const { resetTransform } = this.handRef.current;
+		resetTransform();
 	};
 
 	MoveHandler = () => {
-		//기능 안됨
-		const editorInstance = this.editorRef.current.getInstance();
-		editorInstance.ui.toggleZoomButtonStatus("hand");
+		this.setState({ handActivated: !this.state.handActivated });
 	};
 
-	WaterMarkHandler = (e) => {
-		let file = e.target.files[0];
+	WaterMarkHandler = () => {
 		const editorInstance = this.editorRef.current.getInstance();
-		let imgUrl = URL.createObjectURL(file);
-		editorInstance.addImageObject(imgUrl).then((objectProps) => {
-			this.setState({ imageId: objectProps.id });
-		});
-	};
-
-	WaterMarkApply = () => {
-		const editorInstance = this.editorRef.current.getInstance();
-		editorInstance.applyFilter("mask", { maskObjId: this.state.imageId }, false);
-	};
-
-	SetBrushColor = (color) => {
-		const editorInstance = this.editorRef.current.getInstance();
-		editorInstance.setBrush({ width: 8, color: color.hex });
-		this.BcolorRef.current.style.background = color.hex;
-	};
-
-	SetShapeColor = (color) => {
-		//const editorInstance = this.editorRef.current.getInstance();
-		this.IcolorRef.current.style.background = color.hex;
+		editorInstance.ui.changeMenu("mask");
 	};
 
 	ImageUploadHandler = (event) => {
@@ -328,9 +283,16 @@ class ToolBoxAndCanvas extends Component {
 	};
 
 	SelectAllHandler = () => {
-		/* 동작 안됨 */
 		const editorInstance = this.editorRef.current.getInstance();
-		editorInstance.changeSelectableAll(true);
+		this.setState({ selectActivated: !this.state.selectActivated, selectModeActivated: !this.state.selectModeActivated }, () => {
+			console.log(this.state.selectActivated);
+			console.log(this.state.selectModeActivated);
+			if (this.state.selectActivated) {
+				editorInstance.changeSelectableAll(true);
+			} else {
+				editorInstance.changeSelectableAll(false);
+			}
+		});
 	};
 
 	DeSelectHandler = () => {
@@ -340,26 +302,58 @@ class ToolBoxAndCanvas extends Component {
 
 	FilterPreset1 = () => {
 		const editorInstance = this.editorRef.current.getInstance();
-		editorInstance.applyFilter("Grayscale");
+		this.setState({ filter_preset_1: !this.state.filter_preset_1 }, () => {
+			if (this.state.filter_preset_1) {
+				editorInstance.applyFilter("Grayscale");
+			} else {
+				editorInstance.removeFilter("Grayscale");
+			}
+		});
 	};
 
 	FilterPreset2 = () => {
 		const editorInstance = this.editorRef.current.getInstance();
-		editorInstance.applyFilter("Sepia");
+		this.setState({ filter_preset_2: !this.state.filter_preset_2 }, () => {
+			if (this.state.filter_preset_2) {
+				editorInstance.applyFilter("Sepia");
+			} else {
+				editorInstance.removeFilter("Sepia");
+			}
+		});
 	};
 
 	FilterPreset3 = () => {
 		const editorInstance = this.editorRef.current.getInstance();
-		editorInstance.applyFilter("Emboss");
+		this.setState({ filter_preset_3: !this.state.filter_preset_3 }, () => {
+			if (this.state.filter_preset_3) {
+				editorInstance.applyFilter("Emboss");
+			} else {
+				editorInstance.removeFilter("Emboss");
+			}
+		});
 	};
 
 	FilterPreset4 = () => {
 		const editorInstance = this.editorRef.current.getInstance();
-		editorInstance.applyFilter("Invert");
+		this.setState({ filter_preset_4: !this.state.filter_preset_4 }, () => {
+			if (this.state.filter_preset_4) {
+				editorInstance.applyFilter("Invert");
+			} else {
+				editorInstance.removeFilter("Invert");
+			}
+		});
+	};
+
+	ChangeRecommend = () => {
+		this.setState({ recommend_image_Activated: !this.state.recommend_image_Activated });
+	};
+
+	AddRecommendImage = (url) => {
+		const editorInstance = this.editorRef.current.getInstance();
+		editorInstance.loadImageFromURL(url, "RecommendImage");
 	};
 
 	render() {
-		const { flipActivated, waterMarkActivated, brushColorActivated, shapeColorActivated } = this.state;
 		return (
 			<div>
 				<MenuTop
@@ -383,12 +377,19 @@ class ToolBoxAndCanvas extends Component {
 					FlipXHandler={this.FlipXHandler}
 					FlipYHandler={this.FlipYHandler}
 					ResetFlip={this.ResetFlip}
+					selectModeActivated={this.state.selectModeActivated}
+					filter_preset_1={this.state.filter_preset_1}
+					filter_preset_2={this.state.filter_preset_2}
+					filter_preset_3={this.state.filter_preset_3}
+					filter_preset_4={this.state.filter_preset_4}
+					recommend_image_Activated={this.state.recommend_image_Activated}
+					ChangeRecommend={this.ChangeRecommend}
 				/>
 				<input type="file" id="ImageUploader" onChange={this.ImageChangeHandler} style={{ display: "none" }} />
 				<div className="ToolBoxAndCanvasWrapper">
 					<div className="ToolBox">
-						<div className="ToolBoxButton wip" title="이동 (Move)" onClick={this.HandHandler}>
-							<MdOutlineBackHand size={"1.5rem"} />
+						<div className="ToolBoxButton" title="돋보기 (Extension)" onClick={this.MoveHandler}>
+							<IoSearch size={"1.5rem"} />
 							<br />
 						</div>
 						<div className="ToolBoxButton" title="실행 취소 (Undo)" onClick={this.UndoHandler}>
@@ -443,14 +444,7 @@ class ToolBoxAndCanvas extends Component {
 							<br />
 						</div>
 						<hr />
-						<div
-							className="ToolBoxButton"
-							title="워터마크 (Watermark)"
-							onClick={() => {
-								this.setState({
-									waterMarkActivated: !this.state.waterMarkActivated,
-								});
-							}}>
+						<div className="ToolBoxButton" title="워터마크 (Watermark)" onClick={this.WaterMarkHandler}>
 							<MdOutlineBrandingWatermark size={"1.5rem"} />
 							<br />
 						</div>
@@ -467,79 +461,28 @@ class ToolBoxAndCanvas extends Component {
 							<MdOutlineZoomOut size={"1.5rem"} />
 							<br />
 						</div>
-						<hr />
-						<div
-							className="BrushColor Detail"
-							ref={this.BcolorRef}
-							title="Brush Color"
-							onClick={() => {
-								this.setState({
-									brushColorActivated: !this.state.brushColorActivated,
-								});
-							}}
-						/>
-						<div
-							className="IconColor Detail"
-							ref={this.IcolorRef}
-							title="Icon Color"
-							onClick={() => {
-								this.setState({
-									shapeColorActivated: !this.state.shapeColorActivated,
-								});
-							}}
-						/>
 					</div>
 					<div className="ImageEditorWrapper" style={{ float: "left" }}>
-						<ImageEditor ref={this.editorRef} {...imageEditorOptions} />
-						{flipActivated ? <FlipDetail FlipXHandler={this.FlipXHandler} FlipYHandler={this.FlipYHandler} ResetFlip={this.ResetFlip} /> : null}
-						{waterMarkActivated ? (
-							<WaterMarkDetail
-								WaterMarkHandler={this.WaterMarkHandler}
-								fileInput={this.fileInput}
-								handleButtonClick={this.handleButtonClick}
-								WaterMarkApply={this.WaterMarkApply}
-							/>
-						) : null}
-						{brushColorActivated ? <BrushColorDetail brushColor={this.state.brushColor} SetBrushColor={this.SetBrushColor} /> : null}
-						{shapeColorActivated ? <ShapeColorDetail shapeColor={this.state.shapeColor} SetShapeColor={this.SetShapeColor} /> : null}
+						<>
+							<TransformWrapper ref={this.handRef} disabled={!this.state.handActivated} panning={{ disabled: !this.state.handActivated }}>
+								<TransformComponent>
+									<ImageEditor ref={this.editorRef} {...imageEditorOptions} />
+								</TransformComponent>
+							</TransformWrapper>
+						</>
 					</div>
+					{this.state.recommend_image_Activated ? (
+						<RecommendImage
+							AddRecommendImage={(url) => this.AddRecommendImage(url)}
+							recommend_image_Activated={this.state.recommend_image_Activated}
+						/>
+					) : (
+						""
+					)}
 				</div>
 			</div>
 		);
 	}
 }
 
-function FlipDetail(props) {
-	return (
-		<div className="DetailIcon">
-			<CgEditFlipH className="Detail" size={"4rem"} title="X축 방향 뒤집기 (flip X)" onClick={props.FlipXHandler} />
-			<CgEditFlipV className="Detail" size={"4rem"} title="Y축 방향 뒤집기 (flip Y)" onClick={props.FlipYHandler} />
-			<RxReset className="Detail" size={"4rem"} title="되돌리기 (Reset)" onClick={props.ResetFlip} />
-		</div>
-	);
-}
-
-function WaterMarkDetail(props) {
-	return (
-		<div className="DetailIcon">
-			<MdOutlineFileUpload className="Detail" size={"4rem"} title="파일 업로드 (Upload)" onClick={props.handleButtonClick} />
-			<input type="file" ref={props.fileInput} style={{ display: "none" }} onChange={props.WaterMarkHandler} />
-			<MdOutlineCheck className="Detail" size={"4rem"} title="적용 (Apply)" onClick={props.WaterMarkApply} />
-		</div>
-	);
-}
-function BrushColorDetail(props) {
-	return (
-		<div className="BrushColorPicker">
-			<SketchPicker color={props.brushColor} onChange={props.SetBrushColor} />
-		</div>
-	);
-}
-function ShapeColorDetail(props) {
-	return (
-		<div className="IconColorPicker">
-			<SketchPicker color={props.shapeColor} onChange={props.SetShapeColor} />
-		</div>
-	);
-}
 export default ToolBoxAndCanvas;

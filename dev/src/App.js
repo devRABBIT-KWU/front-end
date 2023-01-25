@@ -28,7 +28,8 @@ class App extends Component {
 			<div className="App">
 				<div className="AppTitleBar">
 					<div className="AppLogoAndFileName">
-						<img className="AppLogo" src={APP_LOGO} alt="임시 애플리케이션 아이콘" /> 캐럿캔버스&nbsp;<span className="ProgramVersionText">v0.1.0.dev230122A.alpha</span>
+						<img className="AppLogo" src={APP_LOGO} alt="임시 애플리케이션 아이콘" /> 당근에디터&nbsp;
+						<span className="ProgramVersionText">v0.1.0.dev230122A.alpha</span>
 					</div>
 					{/* 이 부분은 차후 컴포넌트로 대체 예정 */}
 					<div className="LoginUserInfo">
