@@ -9,8 +9,8 @@ import ToolBoxAndCanvas from "./component/ToolBoxAndCanvas";
 import "./stylesheet/App.scss";
 
 // 이미지 파일 (로고 등)
-import APP_LOGO from "./image/sample_logo.png";
-import USER_PROFILE_IMAGE from "./image/sample_profile.png";
+import APP_LOGO from "./image/carrot.png";
+//import USER_PROFILE_IMAGE from "./image/sample_profile.png";
 
 // NHN - ToastUI Image Editor
 import "tui-image-editor/dist/tui-image-editor.css";
@@ -29,7 +29,7 @@ class App extends Component {
 				<div className="AppTitleBar">
 					<div className="AppLogoAndFileName">
 						<img className="AppLogo" src={APP_LOGO} alt="임시 애플리케이션 아이콘" /> 당근에디터&nbsp;
-						<span className="ProgramVersionText">v0.1.0.dev230122A.alpha</span>
+						<span className="ProgramVersionText">v0.1.1.dev230126A.alpha</span>
 					</div>
 					{/* 백엔드 미구현으로 인한 사용자 로그인 부분 주석처리
 					<div className="LoginUserInfo">

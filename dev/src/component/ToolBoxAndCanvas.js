@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import ImageEditor from "@toast-ui/react-image-editor";
 import MenuTop from "./Menu_top";
 import RecommendImage from "./RecommendImage";
@@ -26,7 +26,6 @@ import {
 	MdOutlineTextFields,
 	MdOutlineBrandingWatermark,
 	MdPhotoFilter,
-	MdOutlineBackHand,
 	MdOutlineZoomIn,
 	MdOutlineZoomOut,
 	/*MdOutlineDoDisturbAlt,*/
