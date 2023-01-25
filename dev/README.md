@@ -7,3 +7,5 @@
 **Toast UI Image Editor** : `yarn add @toast-ui/react-image-editor`
 
 **React-Color** : `yarn add react-color`
+
+**axios** : `yarn add axios`
