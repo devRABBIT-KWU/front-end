@@ -41,7 +41,7 @@ class Menu_top extends Component {
 										불러오기 <span className="EnglishDropDownMenuText">(Load)</span>
 									</li>
 									<hr />
-									<li className="Unavailable">
+									<li onClick={this.props.ExportToDjangoServerHandler}>
 										서버에 저장 <span className="EnglishDropDownMenuText">(Save)</span>
 									</li>
 									<li onClick={this.props.DownloadHandler}>

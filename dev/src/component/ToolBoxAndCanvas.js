@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import ImageEditor from "@toast-ui/react-image-editor";
 import { SketchPicker } from "react-color";
 import "tui-color-picker/dist/tui-color-picker.css";
@@ -36,6 +36,10 @@ import {
 import { CgEditFlipH, CgEditFlipV } from "react-icons/cg";
 import { RxReset } from "react-icons/rx";
 import { IoResize } from "react-icons/io5";
+
+// 서버(백엔드) URL
+const imageServerURL = "http://127.0.0.1:8000/upload-image/";
+
 const imageEditorOptions = {
 	// 에디터 옵션 설정...
 	includeUI: {
@@ -291,16 +295,6 @@ class ToolBoxAndCanvas extends Component {
 
 	CopyToClipboardhandler = async () => {
 		const editorInstance = this.editorRef.current.getInstance();
-		/*
-		navigator.clipboard.write([new ClipboardItem({ 'image/png': editorInstance.toDataURL() })]).then(
-			function () {
-				console.log("success");
-			},
-			function (err) {
-				console.log("failure: ", err);
-			}
-		);
-		*/
 		const blob = await (await fetch(editorInstance.toDataURL())).blob();
 		try {
 			const clipboardItem = new ClipboardItem({ [blob]: "image/png" });
@@ -318,6 +312,38 @@ class ToolBoxAndCanvas extends Component {
 				);
 			}
 		}
+	};
+
+	ExportToDjangoServerHandler = () => {
+		// #1. 변수 선언
+		const editorInstance = this.editorRef.current.getInstance();
+		const formData = new FormData();
+		const reader = new FileReader();
+
+		// #2. 파일을 읽고, FormData 객체로 변환
+		fetch(editorInstance.toDataURL())
+			.then((res) => res.blob())
+			.then((blob) => {
+				reader.readAsDataURL(blob);
+				reader.onloadend = () => {
+					let image_file = new File([blob], "image.png", {type: "image/png"});
+					formData.append("image", image_file);
+					//formData.append("image", JSON.stringify({ image_data: reader.result }));
+
+					// #2-1. Django 서버로 POST 요청 보내기
+					let headers = new Headers();
+					headers.append('Content-Type', 'multipart/form-data')
+					fetch(imageServerURL, {
+						method: "POST",
+						//headers: headers,
+						body: formData,
+					})
+						.then((response) => response.json())
+						.then((data) => console.log("성공적으로 요청됨", data))
+						.catch((error) => console.log("요청 실패: ", error));
+				};
+				alert("서버에 이미지 저장을 잘 요청했습니다.");
+			});
 	};
 
 	ExportToTwitterHandler = async () => {
@@ -364,6 +390,7 @@ class ToolBoxAndCanvas extends Component {
 			<div>
 				<MenuTop
 					ImageUploadHandler={this.ImageUploadHandler}
+					ExportToDjangoServerHandler={this.ExportToDjangoServerHandler}
 					DownloadHandler={this.DownloadHandler}
 					/*ExportToTwitterHandler={this.ExportToTwitterHandler}*/
 					ProjectExitHandler={this.ProjectExitHandler}
@@ -385,6 +412,16 @@ class ToolBoxAndCanvas extends Component {
 					ResetFlip={this.ResetFlip}
 				/>
 				<input type="file" id="ImageUploader" onChange={this.ImageChangeHandler} style={{ display: "none" }} />
+				<form enctype="multipart/form-data" encType="multipart/form-data">
+					<input
+						type="file"
+						id="ImageServerUploader"
+						name="image"
+						accept="image/*"
+						onChange={this.ExportToDjangoServerHandler}
+						style={{ display: "none" }}
+					/>
+				</form>
 				<div className="ToolBoxAndCanvasWrapper">
 					<div className="ToolBox">
 						<div className="ToolBoxButton wip" title="이동 (Move)" onClick={this.HandHandler}>

@@ -30,15 +30,16 @@ class App extends Component {
 					<div className="AppLogoAndFileName">
 						<img className="AppLogo" src={APP_LOGO} alt="임시 애플리케이션 아이콘" /> 캐럿캔버스&nbsp;<span className="ProgramVersionText">v0.1.0.dev230122A.alpha</span>
 					</div>
-					{/* 이 부분은 차후 컴포넌트로 대체 예정 */}
+					{/* 백엔드 미구현으로 인한 사용자 로그인 부분 주석처리
 					<div className="LoginUserInfo">
 						<div id="UserName">
 							데브래빗(devRABBIT)
 							<div id="UserGroup">팀 사용자</div>
 						</div>
-
+						
 						<img className="UserProfileImage" src={USER_PROFILE_IMAGE} alt="임시 애플리케이션 아이콘" />
 					</div>
+					*/}
 				</div>
 
 				<ToolBoxAndCanvas />
