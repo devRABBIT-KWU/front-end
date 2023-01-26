@@ -33,7 +33,7 @@ import {
 
 import { IoResize, IoSearch } from "react-icons/io5";
 // 서버(백엔드) URL
-const imageServerURL = "http://127.0.0.1:8000/upload-image/";
+const imageServerURL = "http://carroteditor.ravit.co.kr:8000/upload-image/";
 
 const imageEditorOptions = {
 	// 에디터 옵션 설정...
