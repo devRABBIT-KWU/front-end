@@ -8,7 +8,7 @@ class RecommendImage extends Component {
 	state = {
 		searchText: "",
 		apiUrl: "https://pixabay.com/api",
-		apiKey: "",
+		apikey: process.env.REACT_APP_API_KEY,
 		images: [],
 		tagText: "",
 		amount: 24,
@@ -19,7 +19,7 @@ class RecommendImage extends Component {
 	componentDidMount() {
 		axios
 			.get(
-				`${this.state.apiUrl}/?key=${this.state.apiKey}&lang=${this.state.lang}&image_type=photo&per_page=${this.state.amount}&safesearch=true&order=${this.state.order}`
+				`${this.state.apiUrl}/?key=${this.state.apikey}&lang=${this.state.lang}&image_type=photo&per_page=${this.state.amount}&safesearch=true&order=${this.state.order}`
 			)
 			.then((res) => {
 				this.setState({ images: res.data.hits });
@@ -30,7 +30,7 @@ class RecommendImage extends Component {
 	SearchTagText = () => {
 		axios
 			.get(
-				`${this.state.apiUrl}/?key=${this.state.apiKey}&q=${this.state.tagText}&lang=${this.state.lang}&image_type=photo&per_page=${this.state.amount}&safesearch=true&order=${this.state.order}`
+				`${this.state.apiUrl}/?key=${this.state.apikey}&q=${this.state.tagText}&lang=${this.state.lang}&image_type=photo&per_page=${this.state.amount}&safesearch=true&order=${this.state.order}`
 			)
 			.then((res) => {
 				this.setState({ images: res.data.hits });
@@ -41,7 +41,7 @@ class RecommendImage extends Component {
 	Search = () => {
 		axios
 			.get(
-				`${this.state.apiUrl}/?key=${this.state.apiKey}&q=${this.state.searchText}&lang=${this.state.lang}&image_type=photo&per_page=${this.state.amount}&safesearch=true&order=${this.state.order}`
+				`${this.state.apiUrl}/?key=${this.state.apikey}&q=${this.state.searchText}&lang=${this.state.lang}&image_type=photo&per_page=${this.state.amount}&safesearch=true&order=${this.state.order}`
 			)
 			.then((res) => {
 				this.setState({ images: res.data.hits });
@@ -59,7 +59,7 @@ class RecommendImage extends Component {
 				if (text === "") {
 					axios
 						.get(
-							`${this.state.apiUrl}/?key=${this.state.apiKey}&lang=${this.state.lang}&image_type=photo&per_page=${this.state.amount}&safesearch=true&order=${this.state.order}`
+							`${this.state.apiUrl}/?key=${this.state.apikey}&lang=${this.state.lang}&image_type=photo&per_page=${this.state.amount}&safesearch=true&order=${this.state.order}`
 						)
 						.then((res) => {
 							this.setState({ images: res.data.hits });
@@ -68,7 +68,7 @@ class RecommendImage extends Component {
 				} else {
 					axios
 						.get(
-							`${this.state.apiUrl}/?key=${this.state.apiKey}&q=${this.state.searchText}&lang=${this.state.lang}&image_type=photo&per_page=${this.state.amount}&safesearch=true&order=${this.state.order}`
+							`${this.state.apiUrl}/?key=${this.state.apikey}&q=${this.state.searchText}&lang=${this.state.lang}&image_type=photo&per_page=${this.state.amount}&safesearch=true&order=${this.state.order}`
 						)
 						.then((res) => {
 							this.setState({ images: res.data.hits });
