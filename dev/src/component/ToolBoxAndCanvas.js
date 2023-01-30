@@ -30,7 +30,7 @@ import {
 	MdOutlineZoomOut,
 	/*MdOutlineDoDisturbAlt,*/
 } from "react-icons/md";
-
+import { GrSelect } from "react-icons/gr";
 import { IoResize, IoSearch } from "react-icons/io5";
 // 서버(백엔드) URL
 const imageServerURL = "http://carroteditor.ravit.co.kr:8000/upload-image/";
@@ -422,8 +422,8 @@ class ToolBoxAndCanvas extends Component {
 				</form>
 				<div className="ToolBoxAndCanvasWrapper">
 					<div className="ToolBox">
-						<div className="ToolBoxButton" title="돋보기 (Extension)" onClick={this.MoveHandler}>
-							<IoSearch size={"1.5rem"} />
+						<div className="ToolBoxButton" title="선택 모드 (Select Mode)" onClick={this.SelectAllHandler}>
+							<GrSelect size={"1.5rem"} />
 							<br />
 						</div>
 						<div className="ToolBoxButton" title="실행 취소 (Undo)" onClick={this.UndoHandler}>
@@ -487,6 +487,10 @@ class ToolBoxAndCanvas extends Component {
 							<br />
 						</div>
 						<hr />
+						<div className="ToolBoxButton" title="돋보기 (Zoom Mode)" onClick={this.MoveHandler}>
+							<IoSearch size={"1.5rem"} />
+							<br />
+						</div>
 						<div className="ToolBoxButton" title="확대 (Zoom in)" onClick={this.ZoomInHandler}>
 							<MdOutlineZoomIn size={"1.5rem"} />
 							<br />

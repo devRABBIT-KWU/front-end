@@ -131,16 +131,16 @@ class Menu_top extends Component {
 							필터 <span className="EnglishMenuText">(Filter)</span>
 							<ul id="filterMenu" className={"DropDownNavMenu " + (this.state.filter_menu_activated ? "" : "Hidden")}>
 								<li className={this.props.filter_preset_1 ? "MenuClicked" : ""} onClick={this.props.FilterPreset1}>
-									필터 프리셋 #1 <span className="EnglishDropDownMenuText">(Filter preset #1)</span>
+									필터: 흑백 <span className="EnglishDropDownMenuText">(Filter: Grayscale)</span>
 								</li>
 								<li className={this.props.filter_preset_2 ? "MenuClicked" : ""} onClick={this.props.FilterPreset2}>
-									필터 프리셋 #2 <span className="EnglishDropDownMenuText">(Filter preset #2)</span>
+									필터: 세피아 <span className="EnglishDropDownMenuText">(Filter: Sepia)</span>
 								</li>
 								<li className={this.props.filter_preset_3 ? "MenuClicked" : ""} onClick={this.props.FilterPreset3}>
-									필터 프리셋 #3 <span className="EnglishDropDownMenuText">(Filter preset #3)</span>
+									필터: 엠보싱 <span className="EnglishDropDownMenuText">(Filter: Emboss)</span>
 								</li>
 								<li className={this.props.filter_preset_4 ? "MenuClicked" : ""} onClick={this.props.FilterPreset4}>
-									필터 프리셋 #4 <span className="EnglishDropDownMenuText">(Filter preset #4)</span>
+									필터: 반전 <span className="EnglishDropDownMenuText">(Filter: Color Invert)</span>
 								</li>
 								<hr />
 								<li onClick={this.props.FilterHandler}>사용자 지정 필터...</li>
