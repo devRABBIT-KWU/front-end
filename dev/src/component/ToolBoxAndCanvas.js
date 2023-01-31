@@ -33,7 +33,8 @@ import {
 import { GrSelect } from "react-icons/gr";
 import { IoResize, IoSearch } from "react-icons/io5";
 // 서버(백엔드) URL
-const imageServerURL = "http://carroteditor.ravit.co.kr:8000/upload-image/";
+//const imageServerURL = "http://carroteditor.ravit.co.kr:8000/upload-image/";
+const imageServerURL = "http://127.0.0.1:8000/upload-image/"  // 로컬호스트 디버깅을 위한 줄.
 
 const imageEditorOptions = {
 	// 에디터 옵션 설정...
@@ -302,7 +303,20 @@ class ToolBoxAndCanvas extends Component {
 		const editorInstance = this.editorRef.current.getInstance();
 		const blob = await (await fetch(editorInstance.toDataURL())).blob();
 		const imageURL = URL.createObjectURL(blob);
-		window.open(`https://twitter.com/intent/tweet?text=Check out this image!&url=${imageURL}`);
+
+		try {
+			const response = await fetch(imageServerURL, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ imageURL: imageURL }),
+			});
+			const public_image_URL = await response.json();
+			window.open(`https://twitter.com/intent/tweet?text=Check out this image!&url=${public_image_URL}`);
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	SelectAllHandler = () => {
@@ -383,7 +397,7 @@ class ToolBoxAndCanvas extends Component {
 					ImageUploadHandler={this.ImageUploadHandler}
 					ExportToDjangoServerHandler={this.ExportToDjangoServerHandler}
 					DownloadHandler={this.DownloadHandler}
-					/*ExportToTwitterHandler={this.ExportToTwitterHandler}*/
+					ExportToTwitterHandler={this.ExportToTwitterHandler}
 					ProjectExitHandler={this.ProjectExitHandler}
 					UndoHandler={this.UndoHandler}
 					RedoHandler={this.RedoHandler}
@@ -423,7 +437,7 @@ class ToolBoxAndCanvas extends Component {
 				<div className="ToolBoxAndCanvasWrapper">
 					<div className="ToolBox">
 						<div className="ToolBoxButton" title="선택 모드 (Select Mode)" onClick={this.SelectAllHandler}>
-							<GrSelect size={"1.5rem"} />
+							<GrSelect style={{ color: "white" }} size={"1.5rem"} />
 							<br />
 						</div>
 						<div className="ToolBoxButton" title="실행 취소 (Undo)" onClick={this.UndoHandler}>

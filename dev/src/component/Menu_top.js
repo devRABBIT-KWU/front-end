@@ -51,7 +51,7 @@ class Menu_top extends Component {
 									<li className="Unavailable">
 										인스타그램으로 내보내기 <span className="EnglishDropDownMenuText">(Export to Instagram)</span>
 									</li>
-									<li className="Unavailable">
+									<li onClick={this.props.ExportToTwitterHandler}>
 										트위터로 내보내기 <span className="EnglishDropDownMenuText">(Export to Twitter)</span>
 									</li>
 									<hr />
