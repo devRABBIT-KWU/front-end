@@ -30,11 +30,11 @@ import {
 	MdOutlineZoomOut,
 	/*MdOutlineDoDisturbAlt,*/
 } from "react-icons/md";
-import { GrSelect } from "react-icons/gr";
+import { RiDragMove2Fill } from "react-icons/ri";
 import { IoResize, IoSearch } from "react-icons/io5";
 // 서버(백엔드) URL
 //const imageServerURL = "http://carroteditor.ravit.co.kr:8000/upload-image/";
-const imageServerURL = "http://127.0.0.1:8000/upload-image/"  // 로컬호스트 디버깅을 위한 줄.
+const imageServerURL = "http://127.0.0.1:8000/upload-image/"; // 로컬호스트 디버깅을 위한 줄.
 
 const imageEditorOptions = {
 	// 에디터 옵션 설정...
@@ -437,7 +437,7 @@ class ToolBoxAndCanvas extends Component {
 				<div className="ToolBoxAndCanvasWrapper">
 					<div className="ToolBox">
 						<div className="ToolBoxButton" title="선택 모드 (Select Mode)" onClick={this.SelectAllHandler}>
-							<GrSelect style={{ color: "white" }} size={"1.5rem"} />
+							<RiDragMove2Fill size={"1.5rem"} />
 							<br />
 						</div>
 						<div className="ToolBoxButton" title="실행 취소 (Undo)" onClick={this.UndoHandler}>
