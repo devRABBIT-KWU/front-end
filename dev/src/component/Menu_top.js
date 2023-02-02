@@ -37,7 +37,7 @@ class Menu_top extends Component {
 									<li onClick={this.props.ImageUploadHandler}>
 										새로 만들기 <span className="EnglishDropDownMenuText">(New Project)</span>
 									</li>
-									<li className="Unavailable">
+									<li onClick={this.props.NotAvailableYetHandler}>
 										불러오기 <span className="EnglishDropDownMenuText">(Load)</span>
 									</li>
 									<hr />
@@ -48,7 +48,10 @@ class Menu_top extends Component {
 										다운로드 <span className="EnglishDropDownMenuText">(Download)</span>
 									</li>
 									<hr />
-									<li className="Unavailable">
+									<li onClick={this.props.NotAvailableYetHandler}>
+										페이스북으로 내보내기 <span className="EnglishDropDownMenuText">(Export to Facebook)</span>
+									</li>
+									<li onClick={this.props.NotAvailableYetHandler}>
 										인스타그램으로 내보내기 <span className="EnglishDropDownMenuText">(Export to Instagram)</span>
 									</li>
 									<li onClick={this.props.ExportToTwitterHandler}>

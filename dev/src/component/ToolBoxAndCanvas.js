@@ -32,9 +32,11 @@ import {
 } from "react-icons/md";
 import { RiDragMove2Fill } from "react-icons/ri";
 import { IoResize, IoSearch } from "react-icons/io5";
+
 // 서버(백엔드) URL
-//const imageServerURL = "http://carroteditor.ravit.co.kr:8000/upload-image/";
-const imageServerURL = "http://127.0.0.1:8000/upload-image/"; // 로컬호스트 디버깅을 위한 줄.
+const targetURL = "http://127.0.0.1:8000"; // 로컬호스트 디버깅을 위한 줄.
+//const targetURL = "http://carroteditor.ravit.co.kr:8000";
+const imageServerURL = targetURL + "/upload-image/";
 
 const imageEditorOptions = {
 	// 에디터 옵션 설정...
@@ -292,10 +294,14 @@ class ToolBoxAndCanvas extends Component {
 						body: formData,
 					})
 						.then((response) => response.json())
-						.then((data) => console.log("성공적으로 요청됨", data))
+						.then((data) => {
+							console.log("성공적으로 요청됨", data);
+							window.open(targetURL + data.image_path, "_blank");
+							alert("서버에 이미지 저장을 잘 요청했습니다.\n이미지 생성 날짜와 아래 ID값을 메모해주세요!\n" + data.msec_id);
+							document.getElementById("imageID").innerHTML = "이미지 ID: " + data.msec_id;
+						})
 						.catch((error) => console.log("요청 실패: ", error));
 				};
-				alert("서버에 이미지 저장을 잘 요청했습니다.");
 			});
 	};
 
@@ -312,8 +318,10 @@ class ToolBoxAndCanvas extends Component {
 				},
 				body: JSON.stringify({ imageURL: imageURL }),
 			});
-			const public_image_URL = await response.json();
-			window.open(`https://twitter.com/intent/tweet?text=Check out this image!&url=${public_image_URL}`);
+			await response.json()
+			.then(data => {
+				window.open(`https://twitter.com/intent/tweet?text=당근에디터에서 제작된 이 이미지를 확인해보세요!&url=${data.imageURL}`);
+			});
 		} catch (error) {
 			console.error(error);
 		}
@@ -390,6 +398,10 @@ class ToolBoxAndCanvas extends Component {
 		editorInstance.loadImageFromURL(url, "RecommendImage");
 	};
 
+	NotAvailableYetHandler = () => {
+		alert("아직 준비 중인 기능입니다.\n빠른 시일 내에 찾아뵙겠습니다!");
+	}
+
 	render() {
 		return (
 			<div>
@@ -422,6 +434,7 @@ class ToolBoxAndCanvas extends Component {
 					filter_preset_4={this.state.filter_preset_4}
 					recommend_image_Activated={this.state.recommend_image_Activated}
 					ChangeRecommend={this.ChangeRecommend}
+					NotAvailableYetHandler={this.NotAvailableYetHandler}
 				/>
 				<input type="file" id="ImageUploader" onChange={this.ImageChangeHandler} style={{ display: "none" }} />
 				<form enctype="multipart/form-data" encType="multipart/form-data">

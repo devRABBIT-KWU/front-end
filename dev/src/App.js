@@ -30,6 +30,7 @@ class App extends Component {
 					<div className="AppLogoAndFileName">
 						<img className="AppLogo" src={APP_LOGO} alt="임시 애플리케이션 아이콘" /> 당근에디터&nbsp;
 						<span className="ProgramVersionText">v0.1.1.dev230126A.alpha</span>
+						<span id="imageID" style={{marginLeft: "2.5rem"}}></span>
 					</div>
 					{/* 백엔드 미구현으로 인한 사용자 로그인 부분 주석처리
 					<div className="LoginUserInfo">
