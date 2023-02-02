@@ -307,8 +307,7 @@ class ToolBoxAndCanvas extends Component {
 
 	ExportToTwitterHandler = async () => {
 		const editorInstance = this.editorRef.current.getInstance();
-		const blob = await (await fetch(editorInstance.toDataURL())).blob();
-		const imageURL = URL.createObjectURL(blob);
+		const imageURL = editorInstance.toDataURL().split(",")[1];
 
 		try {
 			const response = await fetch(imageServerURL, {
