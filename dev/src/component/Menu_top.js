@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import "../stylesheet/Menu_top.scss";
 
 class Menu_top extends Component {
