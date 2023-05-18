@@ -43,8 +43,11 @@ class Menu_top extends Component {
 									<li onClick={this.props.ExportToDjangoServerHandler}>
 										서버에 저장 <span className="EnglishDropDownMenuText">(Save)</span>
 									</li>
-									<li onClick={this.props.DownloadHandler}>
-										다운로드 <span className="EnglishDropDownMenuText">(Download)</span>
+									<li onClick={() => this.props.DownloadHandler("jpeg")}>
+										JPEG로 다운로드 <span className="EnglishDropDownMenuText">(Download as JPEG)</span>
+									</li>
+									<li onClick={() => this.props.DownloadHandler("png")}>
+										PNG로 다운로드 <span className="EnglishDropDownMenuText">(Download as PNG)</span>
 									</li>
 									<hr />
 									<li onClick={this.props.NotAvailableYetHandler}>

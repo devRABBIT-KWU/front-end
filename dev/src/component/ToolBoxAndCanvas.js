@@ -234,11 +234,11 @@ class ToolBoxAndCanvas extends Component {
 		});
 	};
 
-	DownloadHandler = () => {
+	DownloadHandler = (file_format) => {
 		const link = document.createElement("a");
 		const editorInstance = this.editorRef.current.getInstance();
-		link.href = editorInstance.toDataURL();
-		link.download = "download.png";
+		link.href = editorInstance.toDataURL({format: file_format});
+		link.download = "download." + file_format;
 		link.click();
 	};
 
