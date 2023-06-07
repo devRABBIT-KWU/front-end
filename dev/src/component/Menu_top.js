@@ -34,11 +34,13 @@ class Menu_top extends Component {
 							<div>
 								<ul id="fileMenu" className={"DropDownNavMenu " + (this.state.file_menu_activated ? "" : "Hidden")}>
 									<li onClick={this.props.ImageUploadHandler}>
-										새로 만들기 <span className="EnglishDropDownMenuText">(New Project)</span>
+										새 프로젝트 <span className="EnglishDropDownMenuText">(New Project)</span>
 									</li>
+									{/*
 									<li onClick={this.props.NotAvailableYetHandler}>
 										불러오기 <span className="EnglishDropDownMenuText">(Load)</span>
 									</li>
+									*/}
 									<hr />
 									<li onClick={this.props.ExportToDjangoServerHandler}>
 										서버에 저장 <span className="EnglishDropDownMenuText">(Save)</span>
@@ -49,13 +51,17 @@ class Menu_top extends Component {
 									<li onClick={() => this.props.DownloadHandler("png")}>
 										PNG로 다운로드 <span className="EnglishDropDownMenuText">(Download as PNG)</span>
 									</li>
-									<hr />
+									<li onClick={this.props.CopyToClipboardhandler}>
+									클립보드에 복사 <span className="EnglishDropDownMenuText">(Copy to Clipboard)</span>
+									</li>
+									<hr />{/*
 									<li onClick={this.props.NotAvailableYetHandler}>
 										페이스북으로 내보내기 <span className="EnglishDropDownMenuText">(Export to Facebook)</span>
 									</li>
 									<li onClick={this.props.NotAvailableYetHandler}>
 										인스타그램으로 내보내기 <span className="EnglishDropDownMenuText">(Export to Instagram)</span>
 									</li>
+									*/}
 									<li onClick={this.props.ExportToTwitterHandler}>
 										트위터로 내보내기 <span className="EnglishDropDownMenuText">(Export to Twitter)</span>
 									</li>

@@ -34,8 +34,8 @@ import { RiDragMove2Fill } from "react-icons/ri";
 import { IoResize, IoSearch } from "react-icons/io5";
 
 // 서버(백엔드) URL
-const targetURL = "http://127.0.0.1:8000"; // 로컬호스트 디버깅을 위한 줄.
-//const targetURL = "http://carroteditor.ravit.co.kr:8000";
+//const targetURL = "http://127.0.0.1:8000"; // 로컬호스트 디버깅을 위한 줄.
+const targetURL = "http://carroteditor.ravit.co.kr:8000";
 const imageServerURL = targetURL + "/upload-image/";
 
 const imageEditorOptions = {
@@ -252,7 +252,7 @@ class ToolBoxAndCanvas extends Component {
 		const editorInstance = this.editorRef.current.getInstance();
 		const blob = await (await fetch(editorInstance.toDataURL())).blob();
 		try {
-			const clipboardItem = new ClipboardItem({ [blob]: "image/png" });
+			const clipboardItem = new ClipboardItem({ "image/png": blob });
 			await navigator.clipboard.write([clipboardItem]);
 			alert("클립보드에 이미지가 복사되었습니다!\n(Successfully copied image to clipboard!)");
 		} catch (err) {
@@ -268,6 +268,7 @@ class ToolBoxAndCanvas extends Component {
 			}
 		}
 	};
+
 
 	ExportToDjangoServerHandler = () => {
 		// #1. 변수 선언
