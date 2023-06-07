@@ -35,7 +35,7 @@ import { IoResize, IoSearch } from "react-icons/io5";
 
 // 서버(백엔드) URL
 //const targetURL = "http://127.0.0.1:8000"; // 로컬호스트 디버깅을 위한 줄.
-const targetURL = "http://carroteditor.ravit.co.kr:8000";
+const targetURL = "https://ceserver.ravit.co.kr";
 const imageServerURL = targetURL + "/upload-image/";
 
 const imageEditorOptions = {
