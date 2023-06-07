@@ -1,6 +1,6 @@
 @echo off
 
 title devRABBIT/front-end
-yarn build
+call yarn build
 
 pause < nul

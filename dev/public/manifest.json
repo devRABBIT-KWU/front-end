@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "당근에디터 (CarrotEditor)",
+  "name": "당근에디터: 가볍고 빠른 이미지 편집 웹 도구",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#ff8040",
+  "background_color": "#252830"
 }

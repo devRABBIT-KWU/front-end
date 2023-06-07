@@ -249,6 +249,7 @@ class ToolBoxAndCanvas extends Component {
 	};
 
 	CopyToClipboardhandler = async () => {
+		await navigator.permissions.query({ name: "clipboard-write" });
 		const editorInstance = this.editorRef.current.getInstance();
 		const blob = await (await fetch(editorInstance.toDataURL())).blob();
 		try {
@@ -263,7 +264,7 @@ class ToolBoxAndCanvas extends Component {
 				alert("클립보드에 이미지가 복사되었습니다!\n(Successfully copied image to clipboard!)");
 			} catch (err2) {
 				alert(
-					"클립보드로의 이미지 복사에 실패했습니다.\n브라우저가 해당 기능을 지원하지 않습니다.\n(Failed to copy image to clipboard. This browser doesn't support this feature.)"
+					"클립보드로의 이미지 복사에 실패했습니다.\n브라우저가 해당 기능을 지원하지 않거나, \n클립보드 접근 권한이 없습니다.\n(Failed to copy image to clipboard. This browser doesn't support this feature,\nor our app doesn't have sufficient permission.)"
 				);
 			}
 		}
@@ -320,7 +321,12 @@ class ToolBoxAndCanvas extends Component {
 			});
 			await response.json()
 			.then(data => {
-				window.open(`https://twitter.com/intent/tweet?text=당근에디터에서 제작된 이 이미지를 확인해보세요!&url=${data.imageURL}`);
+				// 오동작으로 인한 URL 처리 코드 추가
+				const correctedURL = data.imageURL.replace(
+					"http://carroteditor.ravit.co.kr/:8000",
+					"http://carroteditor.ravit.co.kr:8000"
+				);
+				window.open(`https://twitter.com/intent/tweet?text=당근에디터에서 제작된 이 이미지를 확인해보세요!&url=${correctedURL}`);
 			});
 		} catch (error) {
 			console.error(error);
